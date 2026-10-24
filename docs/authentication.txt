@@ -1,0 +1,13 @@
+Authentication and Authorization
+
+Authentication verifies who a user is, while authorization decides what that user is permitted to do. An API needs both: proving identity first, then checking permissions on each protected endpoint.
+
+JSON Web Tokens are a common way to authenticate API requests without keeping server-side sessions. A login endpoint checks the supplied credentials and returns a signed token. The client then sends that token in the Authorization header on every subsequent request.
+
+The server verifies the token's signature and expiration before honoring a request. Because the token itself carries the user's claims, the server does not need to look up a session record for each call. That is what makes the approach stateless.
+
+Password storage requires care. Passwords are never stored in plain text. Instead, a password is run through a slow hashing function such as bcrypt along with a per-user salt, and only the resulting hash is stored. Verification re-hashes the submitted password and compares the results.
+
+Tokens must be treated as secrets. Anyone holding a valid token can act as that user until it expires, so tokens are kept out of URLs, server logs, and client-side storage that other scripts can read. Short expiry times combined with a refresh mechanism limit the damage if a token leaks.
+
+Authorization is enforced with dependencies. A FastAPI dependency can decode the token, load the current user, and raise an error if the token is missing or invalid. Endpoints that need a logged-in user declare that dependency, and FastAPI runs it before the endpoint body executes.

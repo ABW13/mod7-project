@@ -1,0 +1,29 @@
+# Virtual environment — never commit this
+venv/
+venv*/
+.venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ChromaDB persistent storage — regenerate with `python ingest.py`
+chroma_data/
+chroma_demo/
+search_db/
+knowledge_base_db/
+my_eval_db/
+
+# Secrets
+.env
+*.token
+HF_TOKEN
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS / editor noise
+.DS_Store
+.vscode/
+.idea/

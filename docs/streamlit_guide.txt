@@ -1,0 +1,15 @@
+Streamlit Guide
+
+Streamlit is a Python library for building web applications without writing HTML, CSS, or JavaScript. A script becomes an app, and running it starts a local web server.
+
+The most important concept in Streamlit is the re-run model. Every time a user interacts with any widget, the entire Python script re-runs from top to bottom. There is no persistent function scope between interactions the way there is in a traditional web framework.
+
+Because scripts re-run completely, ordinary variables reset on every interaction. A counter incremented in the script body returns to its starting value on the next click. The same applies to anything loaded from a file or computed at the top of the script.
+
+Use st.session_state to persist data across re-runs. It is a dictionary-like object that survives re-execution. The standard initialization pattern is: if "key" not in st.session_state: st.session_state["key"] = default_value. After that, read and write the value normally.
+
+Widgets can be bound to session state by passing a key argument. When a widget has a key, its current value is available at st.session_state["key"] and other parts of the script can set that value to update the widget. This is how one button can change what appears in a text box.
+
+Streamlit provides layout components such as st.columns for side-by-side content, st.sidebar for controls, and st.tabs for organizing views. Use st.set_page_config at the top of your script for page-wide settings like title, icon, and layout width.
+
+Expensive work should be cached. The st.cache_resource decorator keeps an object alive across re-runs, which is appropriate for database connections and model handles. The st.cache_data decorator caches the return value of a function and is appropriate for dataframes and computations that depend only on their arguments.

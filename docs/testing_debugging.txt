@@ -1,0 +1,15 @@
+Testing and Debugging
+
+Testing confirms that an application behaves as expected and keeps behaving that way as it changes. A test states an input, runs the code, and asserts something about the result.
+
+Pytest discovers test functions by name, runs them, and reports which passed and which failed. A function whose name starts with test_ is collected automatically, and a failure shows the expected and actual values side by side, which is usually enough to locate the problem.
+
+Fixtures provide reusable setup. A fixture is a function marked as such that returns a value a test needs, such as a database session or a configured client. Pytest runs the fixture before the test and can tear it down afterwards, so setup code is written once rather than repeated in every test.
+
+FastAPI's TestClient simulates HTTP requests without running a separate server. A test can call an endpoint with a prepared request body and inspect the returned status code and JSON. This makes it practical to test validation behaviour directly, including the 422 responses produced when submitted data does not match a Pydantic model.
+
+Mocking isolates code from external services. When a function would call a payment provider or a remote API, a mock replaces that call with a controlled return value. The test then verifies your code's handling of success and failure without depending on a network.
+
+Reading a traceback is the core debugging skill. Python prints the call stack with the innermost frame last, so the final lines describe where the error actually occurred. The exception type and message name the problem: a KeyError means a missing key, a TypeError means a value of the wrong shape reached a function.
+
+Printing values is often faster than reasoning about them. Inspecting a variable at the point of failure answers questions that reading the code cannot, particularly when a value has been transformed through several steps.

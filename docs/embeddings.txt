@@ -1,0 +1,17 @@
+Embeddings and Semantic Retrieval
+
+An embedding is a list of numbers that represents the meaning of a piece of text. Texts with similar meaning produce vectors that point in similar directions, so meaning becomes something a computer can compare numerically.
+
+Embedding models are trained so that related texts land near each other in the vector space. A sentence about REST APIs and a sentence about building web services end up close together even though they share almost no words. This is what separates semantic search from keyword search.
+
+Cosine similarity measures the angle between two vectors rather than the distance between their endpoints. It is the usual way to compare embeddings because it ignores vector length and depends only on direction. A score of 1.0 means identical direction, 0 means unrelated, and negative values mean opposed directions.
+
+Most embedding models have a maximum input length, commonly a few hundred tokens. Text beyond that limit is truncated, so a long document cannot be represented well by a single vector. This is the reason chunking exists.
+
+Chunking splits a long document into smaller passages before embedding. Each passage gets its own vector, so a query can match the specific part of the document that answers it rather than a blurred average of the whole thing.
+
+Chunk size affects search quality. Chunks that are too small split a complete idea across a boundary, so neither half matches well. Chunks that are too large dilute the vector: one embedding has to represent several topics at once, and the signal from any single sentence is weakened.
+
+Overlap between adjacent fixed-size chunks keeps a sentence that spans a boundary intact in at least one of the neighbouring chunks. A typical overlap is ten to twenty percent of the chunk size.
+
+A vector database stores embeddings and supports similarity search over them. ChromaDB keeps vectors in an index and returns the nearest ones to a query vector, with optional metadata filtering. Because the search happens in the index rather than by comparing every vector in Python, a vector database scales to collections far larger than a list held in memory.

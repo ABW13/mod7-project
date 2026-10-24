@@ -1,0 +1,15 @@
+Frontend Concepts
+
+The DOM is the browser's tree representation of an HTML page. Every element in the markup becomes a node in that tree. JavaScript reads and modifies the tree to change what the user sees, which is how a page responds to input without reloading.
+
+JavaScript selects elements with querySelector and querySelectorAll, which take CSS selectors as their argument. Once an element is selected, its content, attributes, and styles can be changed directly. Changes take effect immediately because the browser re-renders the affected part of the tree.
+
+Event listeners connect user actions to functions. addEventListener attaches a handler to an element for a named event such as click, submit, or input. The handler runs when the event fires, and the event object passed to it carries details about what happened and which element was involved.
+
+CSS Flexbox arranges child elements in a row or column. Setting display:flex on a container turns it into a flex container, and properties such as justify-content, align-items, and gap control how the children are laid out and spaced.
+
+CSS Grid arranges elements in two dimensions at once. Where Flexbox is designed for laying out items along a single axis, Grid is designed for layouts that need both rows and columns defined together, such as a page with a sidebar and a main content area.
+
+Responsive layout adjusts to the screen size. Media queries apply different rules below or above a given width, and flexible units such as percentages, rem, and fr let elements resize with the viewport rather than being fixed in pixels.
+
+Form handling in the browser involves reading input values, validating them before submission, and sending them to a server. Client-side validation improves the experience by catching mistakes early, but it is never sufficient on its own, because it can be bypassed. Server-side validation is what actually protects the data.

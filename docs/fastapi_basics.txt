@@ -1,0 +1,15 @@
+FastAPI Basics
+
+FastAPI is a modern Python web framework for building APIs. It was created by Sebastián Ramírez and released in 2018. FastAPI is built on top of Starlette for the web parts and Pydantic for the data parts.
+
+One of FastAPI's biggest advantages is automatic data validation. When you define a Pydantic model for your endpoint, FastAPI automatically validates incoming request data. If the data doesn't match the model, the client receives a detailed 422 error response listing the fields that failed.
+
+Pydantic models describe the expected structure of request and response data. A model defines fields, their data types, which values are optional, and validation rules such as minimum lengths or allowed ranges. Pydantic also converts compatible values to the correct Python types, so a JSON string containing a number can populate an integer field.
+
+FastAPI generates interactive API documentation automatically. Swagger UI is available at the /docs path and ReDoc at /redoc. The documentation stays in sync with your code because it is generated from your type hints and Pydantic models rather than written by hand.
+
+Async support is another key feature. FastAPI supports Python's async/await syntax natively, which means your API can handle multiple concurrent requests without blocking. When one request is waiting on a database query, the server processes other requests instead.
+
+HTTP status codes communicate the outcome of a request. A successful GET returns 200, a newly created resource returns 201, a malformed request returns 400, a missing resource returns 404, and failed validation returns 422. Returning the correct code matters because clients and monitoring tools rely on it.
+
+Routing in FastAPI is defined with decorators. A function decorated with @app.get("/items") handles GET requests to that path. Path parameters are declared in the route string and function arguments, and FastAPI validates them using the same type-hint mechanism used for request bodies.

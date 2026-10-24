@@ -1,0 +1,15 @@
+Databases and SQLAlchemy
+
+SQLAlchemy is a Python toolkit for communicating with relational databases. Its object-relational mapping features connect Python classes to database tables, so application code can create, retrieve, update, and delete records through Python objects rather than writing every SQL statement by hand.
+
+A model class maps to a table and each attribute maps to a column. Declaring a relationship between two models lets you navigate from one object to related objects in Python, and SQLAlchemy translates that navigation into the joins needed to fetch the data.
+
+A session tracks pending changes to objects. Changes are not written to the database until the session is committed. If something fails partway through, a rollback discards the pending changes as a unit, which is what keeps related writes consistent.
+
+Transactions group statements so that either all of them take effect or none do. Without a transaction, a failure halfway through a multi-step write leaves the database in a state that no part of the application expects.
+
+Migrations describe how a schema changes over time. A migration tool applies those changes in order so every environment ends up with the same structure. Each migration is a small, ordered step: add a column, backfill its values, then enforce a constraint.
+
+Queries can be written with the ORM or with explicit SQL. The ORM is convenient and safer against injection because values are bound as parameters. Explicit SQL is worth reaching for when a query is complex enough that the ORM's generated SQL becomes hard to reason about.
+
+Indexes speed up lookups on the columns used in filters and joins, at the cost of slower writes and extra storage. Adding an index on a column that is queried frequently is usually the first performance change worth making.

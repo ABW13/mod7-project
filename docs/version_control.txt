@@ -1,0 +1,15 @@
+Version Control with Git
+
+Git records snapshots of a project's files as commits. Each commit stores the state of the tracked files along with a message, the author, and a reference to the commit that came before it, which together form the project's history.
+
+The working directory is what you see in your editor. The staging area is a holding place for changes you intend to include in the next commit. The repository holds the commits themselves. Adding a file with git add moves a change into the staging area, and git commit writes the staged changes into history.
+
+A branch is a movable pointer to a commit. Creating a branch gives you an independent line of work that does not affect the main line until the branches are merged. Because branches are cheap, a short-lived branch per feature is a common workflow.
+
+Merging combines the work from one branch into another. When both branches changed the same lines, Git cannot decide which version is correct and reports a conflict. Resolving it means editing the file to the intended final content and committing the result.
+
+A remote is a copy of the repository hosted elsewhere. Pushing uploads your commits to the remote, and pulling brings commits from the remote into your local copy. The first push for a branch also sets its upstream, so later pushes need no arguments.
+
+A .gitignore file lists patterns that Git should not track. Files that are generated rather than written by hand belong there: build output, caches, virtual environments, and local secrets. Committing a virtual environment is a common mistake that bloats a repository and makes it useless to clone.
+
+Commit messages describe what changed and why. A short summary line followed by an optional explanation is the usual form, and keeping each commit focused on one change makes history far easier to read later.
