@@ -135,12 +135,13 @@ characters, Query 1 returned chunks from four different source files, where at
 150 characters it returned chunks from one. That one query accounts for the
 entire difference between the middle and the extremes.
 
-Query 3 failed at every chunk size — zero results above threshold. "Why
-does my data disappear when I click a button?" retrieved nothing at 150, 300,
-or 600 characters, despite streamlit_guide.txt containing the answer. This is
-not a chunking effect; it points to threshold calibration or to the query's
-phrasing sitting too far from the document's vocabulary. Testing at a lower
-threshold distinguishes the two causes:
+Query 3 failed at every chunk size — a threshold effect, not a chunking one. "Why does my data disappear when I click a button?" retrieved nothing above the 0.30 threshold at 150, 300, or 600 characters, despite streamlit_guide.txt containing the answer. Re-running the same query at threshold 0.1 returns the correct chunk first, at similarity 0.249:
+
+1. [ low] sim=0.249 (streamlit_guide.txt #1)
+   reset on every interaction. A counter incremented in the script body
+   returns to its starting value on the next click...
+
+So the failure was calibration, not retrieval: the right passage ranked first but scored below the threshold. The query's phrasing ("data disappear", "click a button") sits far from the document's wording ("variables reset", "re-run", "widget interaction"), so the match is weak but present. This is the recall/precision tradeoff from the threshold experiment, and it is the strongest argument in this report for testing thresholds per corpus rather than adopting a fixed value.
 
     python search.py "Why does my data disappear when I click a button?" --threshold 0.1 --n-results 5
 
